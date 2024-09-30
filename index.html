@@ -121,7 +121,7 @@
         async function wow() {
             let firstNameEl = document.getElementById("firstName");
             let lastNameEl = document.getElementById("lastName");
-            const json = `{"FirstName":${firstNameEl.value},"LastName":${lastNameEl.value}}`;
+            const json = `{"FirstName":"${firstNameEl.value}","LastName":"${lastNameEl.value}"}`;
 
             const response = await fetch(
                 "https://go-voucher-srv.onrender.com/add",
