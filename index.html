@@ -1,0 +1,135 @@
+<!doctype html>
+
+<html>
+    <head>
+        <script src="https://cdn.tailwindcss.com"></script>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    </head>
+    <body>
+        <style>
+            :root {
+                --background: 0 0% 100%;
+                --foreground: 240 10% 3.9%;
+                --card: 0 0% 100%;
+                --card-foreground: 240 10% 3.9%;
+                --popover: 0 0% 100%;
+                --popover-foreground: 240 10% 3.9%;
+                --primary: 240 5.9% 10%;
+                --primary-foreground: 0 0% 98%;
+                --secondary: 240 4.8% 95.9%;
+                --secondary-foreground: 240 5.9% 10%;
+                --muted: 240 4.8% 95.9%;
+                --muted-foreground: 240 3.8% 45%;
+                --accent: 240 4.8% 95.9%;
+                --accent-foreground: 240 5.9% 10%;
+                --destructive: 0 72% 51%;
+                --destructive-foreground: 0 0% 98%;
+                --border: 240 5.9% 90%;
+                --input: 240 5.9% 90%;
+                --ring: 240 5.9% 10%;
+                --chart-1: 173 58% 39%;
+                --chart-2: 12 76% 61%;
+                --chart-3: 197 37% 24%;
+                --chart-4: 43 74% 66%;
+                --chart-5: 27 87% 67%;
+                --radius: 0.5rem;
+            }
+            img[src="/placeholder.svg"],
+            img[src="/placeholder-user.jpg"] {
+                filter: sepia(0.3) hue-rotate(-60deg) saturate(0.5) opacity(0.8);
+            }
+        </style>
+        <style>
+            h1,
+            h2,
+            h3,
+            h4,
+            h5,
+            h6 {
+                font-family: "Inter", sans-serif;
+                --font-sans-serif: "Inter";
+            }
+        </style>
+        <style>
+            body {
+                font-family: "Inter", sans-serif;
+                --font-sans-serif: "Inter";
+            }
+        </style>
+        <section class="bg-background py-12 md:py-24">
+            <div class="container mx-auto px-4 md:px-6">
+                <div class="mx-auto max-w-xl space-y-6 text-center">
+                    <div>
+                        <h2
+                            class="text-3xl font-bold tracking-tighter md:text-4xl"
+                        >
+                            Apply for an E-Bike Voucher
+                        </h2>
+                        <p class="mt-2 text-muted-foreground md:text-xl">
+                            Don't miss out on this opportunity to get a discount
+                            on your next e-bike purchase.
+                        </p>
+                    </div>
+                    <form id="myForm" class="space-y-4">
+                        <div class="grid grid-cols-2 gap-4">
+                            <div class="space-y-2">
+                                <label
+                                    class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                                    for="firstName"
+                                >
+                                    First Name
+                                </label>
+                                <input
+                                    class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+                                    id="firstName"
+                                    placeholder="Enter your first name"
+                                />
+                            </div>
+                            <div class="space-y-2">
+                                <label
+                                    class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                                    for="lastName"
+                                >
+                                    Last Name
+                                </label>
+                                <input
+                                    class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+                                    id="lastName"
+                                    placeholder="Enter your last name"
+                                />
+                            </div>
+                        </div>
+                        <button
+                            class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground bg-purple-300 h-10 px-4 py-2 w-full"
+                            onclick="wow()"
+                        >
+                            Apply for Voucher
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </body>
+    <script>
+        var form = document.getElementById("myForm");
+        function handleForm(event) {
+            event.preventDefault();
+        }
+        form.addEventListener("submit", handleForm);
+
+        async function wow() {
+            let firstNameEl = document.getElementById("firstName");
+            let lastNameEl = document.getElementById("lastName");
+            const json = `{"FirstName":${firstNameEl.value},"LastName":${lastNameEl.value}}`;
+
+            const response = await fetch(
+                "https://go-voucher-srv.onrender.com/add",
+                {
+                    method: "POST",
+                    body: json,
+                },
+            );
+        }
+    </script>
+</html>

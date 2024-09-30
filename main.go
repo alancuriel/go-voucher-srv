@@ -38,6 +38,12 @@ func main() {
 		c.Status(http.StatusCreated)
 	})
 
+	index := func(c *gin.Context) {
+		c.File("index.html")
+	}
+
+	r.GET("/", index)
+
 	r.GET("/list", func(c *gin.Context) {
 		fmt.Println(c.ClientIP())
 		entries, err := dao.ListAllVoucherEntry()
